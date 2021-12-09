@@ -19,7 +19,18 @@ https://www.researchgate.net/publication/319553365_Predicting_Material_Backorder
 
 # Solving the problem with Machine Learning:
 
-- This repository consists of a jupyter notebook where machine learning classifiers are investigated in order to propose a predictive model for the problem.
+### Performance metrics used:
+     - area under the Receiver Operator Characteristic and precision-recall curves,
+     - Confusion Matrices.
+
+### Models used: 
+     - Logistic Regression
+     - Decision Tree
+     - Random Forest
+     - XGBoost
+     - EasyEnsemble
+     
+- This repository consists of a jupyter notebook where above mentioned machine learning classifiers are investigated in order to propose a predictive model for the problem.
 
 - This is case of high class imbalance, where the relative frequency of items that goes into backorder is extemely rare when compared to items that do not.
 
@@ -29,13 +40,5 @@ https://www.researchgate.net/publication/319553365_Predicting_Material_Backorder
 
 - Sampling techniques like Random Oversampling and SMOTE are employed in this particular task.
 
-## Performance metrics used:
-     - area under the Receiver Operator Characteristic and precision-recall curves,
-     - Confusion Matrices.
+- Among all the models XGBoost peformed well with better resuls in all performance metrics.
 
-## Models used: 
-     - Logistic Regression
-     - Decision Tree
-     - Random Forest
-     - XGBoost
-     - EasyEnsemble
