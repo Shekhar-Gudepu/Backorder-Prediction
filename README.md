@@ -1,6 +1,6 @@
 # Backorder-Prediction
 
-## What does a backorder mean and ?
+## What does a backorder mean ?
 
 An item on backorder is an out of stock product that is expected to be delivered by a certain date once it is back in stock. Businesses will often still sell products on backorder with the guarantee to ship them to the buyer once their inventory has been replenished.
 Backordering an item means the shopper can buy the item now and receive it at a future date when the item is in stock and available.
