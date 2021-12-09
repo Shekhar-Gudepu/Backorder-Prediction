@@ -17,4 +17,25 @@ https://www.kaggle.com/c/untadta
 https://www.researchgate.net/publication/319553365_Predicting_Material_Backorders_in_Inventory_Management_using_Machine_Learning
 
 
-In this paper, machine learning classifiers are investigated in order to propose a predictive model for this imbalanced class problem, where the relative frequency of items that goes into backorder is rare when compared to items that do not. Specific metrics such as area under the Receiver Operator Characteristic and precision-recall curves, sampling techniques and ensemble learning are employed in this particular task.
+# Solving the problem with Machine Learning:
+
+- This repository consists of a jupyter notebook where machine learning classifiers are investigated in order to propose a predictive model for the problem.
+
+- This is case of high class imbalance, where the relative frequency of items that goes into backorder is extemely rare when compared to items that do not.
+
+- Data contains 23 columns which include general risk flags,current inventory level,Sales,Forecast etc.,EDA is performed on all features to draw useful insights.
+
+- Generation of new features have been useful for few models.
+
+- Sampling techniques like Random Oversampling and SMOTE are employed in this particular task.
+
+## Performance metrics used:
+     - area under the Receiver Operator Characteristic and precision-recall curves,
+     - Confusion Matrices.
+
+## Models used: 
+     - Logistic Regression
+     - Decision Tree
+     - Random Forest
+     - XGBoost
+     - EasyEnsemble
