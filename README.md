@@ -56,3 +56,4 @@ https://www.researchgate.net/publication/319553365_Predicting_Material_Backorder
 
 
 <h2> 3.Exploratory Data Analysis</h2>
+![alt text] (https://github.com/Shekhar-Gudepu/Backorder-Prediction/blob/main/Missing%20Values%20loc.png?raw=true) 
