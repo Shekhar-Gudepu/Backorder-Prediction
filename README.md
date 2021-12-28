@@ -1,44 +1,58 @@
-# Backorder-Prediction
+<h1> Product Backorder Prediction </h1>
+<h2> 1. Business Problem </h2>
 
-## What does a backorder mean ?
+### Description
+
+#### What does a backorder mean ?
 
 An item on backorder is an out of stock product that is expected to be delivered by a certain date once it is back in stock. Businesses will often still sell products on backorder with the guarantee to ship them to the buyer once their inventory has been replenished.
 Backordering an item means the shopper can buy the item now and receive it at a future date when the item is in stock and available.
 
 Material backorder is a common supply chain problem, impacting an inventory system service level and effectiveness.Identifying parts with the highest chances of shortage prior its occurrence can present a high opportunity to improve an overall company’s performance.
+### Problem statement: 
 
-# Problem statement: 
-Predict products that have higher chances of getting backorders to help manage inventory of a bussiness.
+The objective of the problem is to predict products that have higher chances of getting into backorder based on historical data.
+So using the existing data,a binary machine learnig model should be built to classify the products that might run into backorders.
 
-# Data Source:
+<h3> Business Objectives/Constraints: </h3>
+Following are the Objectives/Constraints to be considered while building the model,
+
+
+- Misclassification could be a problem based on the space available in the warehouse.
+- Interpretability is an important aspect,knowing why the model predicts backorder could help the seller to determine the reorder point.
+- Latency is not an important aspect.
+
+#### Data Source:
 https://www.kaggle.com/c/untadta
 
-# Research paper:
+#### Research paper:
 https://www.researchgate.net/publication/319553365_Predicting_Material_Backorders_in_Inventory_Management_using_Machine_Learning
 
 
-# Solving the problem with Machine Learning:
+<h2> 2.Solving the problem with Machine Learning</h2>
+ <h3> Data Overview </h3>
+ 
+- Train data consists of 1687861 entries whereas test data consists of 242076 entries.
+- Both Train and test files have 23 columns.    
 
-### Performance metrics used:
+- Data fields:
+    - sku - unique code for identifing each item
+    - national_inv- Current inventory level of component
+    - lead_time -Transit time
+    - in_transit_qty - Quantity in transit
+    - forecast_x_month - Forecast sales for the net 3, 6, 9 months
+    - sales_x_month - Sales quantity for the prior 1, 3, 6, 9 months
+    - min_bank - Minimum recommended amount in stock
+    - potential_issue - Indictor variable noting potential issue with item
+    - pieces_past_due - Parts overdue from source
+    - perf_x_months_avg - Source performance in the last 6 and 12 months
+    - local_bo_qty - Amount of stock orders overdue
+    - X17-X22 - General Risk Flags
+    - went_on_back_order - Product went on backorder
+    
+### Performance metrics:
      - area under the Receiver Operator Characteristic and precision-recall curves,
      - Confusion Matrices.
 
-### Models used: 
-     - Logistic Regression
-     - Decision Tree
-     - Random Forest
-     - XGBoost
-     - EasyEnsemble
-     
-- This repository consists of a jupyter notebook where above mentioned machine learning classifiers are investigated in order to propose a predictive model for the problem.
 
-- This is case of high class imbalance, where the relative frequency of items that goes into backorder is extemely rare when compared to items that do not.
-
-- Data contains 23 columns which include general risk flags,current inventory level,Sales,Forecast etc.,EDA is performed on all features to draw useful insights.
-
-- Generation of new features have been useful for few models.
-
-- Sampling techniques like Random Oversampling and SMOTE are employed in this particular task.
-
-- Among all the models XGBoost peformed well with better resuls in all performance metrics.
-
+<h2> 3.Exploratory Data Analysis</h2>
