@@ -312,28 +312,32 @@ recommended stock then flag the product 1 else 0.
 
 1.Random Oversampling: Data in the minority class has been randomly repeated multiple times to match the no.of datapoints in the majority class.
 
-2.SMOTE Oversampling: SMOTE is an algorithm that generates synthetic datapoints of the minority class such that both classes have equal no.of datapoints.
+2.Class weight parameter of sklearn module: sklearn provides a parameter 'class_weight' through which minority datapoints can be given more weight when the model fits the data.
 
-3.Class weight parameter of sklearn module: sklearn provides a parameter 'class_weight' through which minority datapoints can be given more weight when the model fits the data.
-
-4.Imblearn module's ensemble models: Imblearn provides various ensemble models where each base learner is fed with data that is oversampled or undersampled.Imblearn's 'BalancedRandomForestClassifier' has been used where each bootstrap sample is undersampled.
+3.Imblearn module's ensemble models: Imblearn provides various ensemble models where each base learner is fed with data that is oversampled or undersampled.Imblearn's 'BalancedRandomForestClassifier' has been used where each bootstrap sample is undersampled.
 
 <h2>Machine Learning models and their results</h2>
 
 Below are the results obtained from applying various ML models,
 
-|     MODEL      | ROC-AUC_train | ROC-AUC_test | PR-AUC_train | PR-AUC_test |
-|----------------|---------------|--------------|--------------|-------------|
-|     Dummy      |     0.477     |      --      |      --      |    0.006    |
-|       LR       |     0.878     |    0.877     |    0.064     |    0.068    |
-|       DT       |     0.957     |    0.933     |    0.201     |    0.162    |
-|       RF       |     0.999     |    0.955     |    0.908     |    0.286    |
-|      XGB       |     0.973     |    0.949     |    0.241     |     0.20    |
-|      BRF       |     0.975     |    0.944     |    0.241     |    0.176    |
-| oversample_XGB |     0.998     |    0.952     |    0.992     |    0.238    |
-|   SMOTE_XGB    |     0.999     |    0.932     |    0.999     |    0.184    |
-| oversample_RF  |     0.998     |    0.932     |    0.996     |     0.16    |
-|    SMOTE_RF    |     0.998     |    0.946     |    0.991     |    0.192    |
++------------------+---------+--------+-----------+--------+--------------+
+|      MODEL       | ROC-AUC | PR-AUC | PRECISION | RECALL | +VE F1-SCORE |
++------------------+---------+--------+-----------+--------+--------------+
+|      Logit       |   0.9   |  0.09  |    0.05   |  0.87  |     0.09     |
+|   Logit_binned   |   0.89  |  0.09  |    0.05   |  0.8   |     0.09     |
+|        DT        |   0.93  |  0.21  |    0.07   |  0.86  |     0.12     |
+|    DT_binned     |   0.92  |  0.18  |    0.06   |  0.84  |     0.12     |
+|        RF        |   0.96  |  0.39  |    0.17   |  0.77  |     0.27     |
+|    RF_binned     |   0.95  |  0.32  |    0.13   |  0.78  |     0.22     |
+|       XGB        |   0.96  |  0.44  |    0.17   |  0.79  |     0.28     |
+|    XGB_binned    |   0.96  |  0.41  |    0.29   |  0.61  |     0.39     |
+|  RF_oversampled  |   0.95  |  0.24  |    0.13   |  0.7   |     0.23     |
+| RF_undersampled  |   0.95  |  0.21  |    0.07   |  0.89  |     0.13     |
+| XGB_oversampled  |   0.97  |  0.5   |    0.63   |  0.39  |     0.48     |
+| XGB_undersampled |   0.95  |  0.19  |    0.07   |  0.89  |     0.13     |
+|   Balanced_RF    |   0.95  |  0.27  |    0.08   |  0.87  |     0.14     |
+|   EasyEnsemble   |   0.93  |  0.17  |    0.06   |  0.86  |     0.09     |
++------------------+---------+--------+-----------+--------+--------------+
 
 
-Based on the above performance table Random Forest seems to be performing well and can be used for predicting backorders in realtime.
+Based on the above performance table, Random Forest trained on undersampled data seems to perform well on the data and can be used for predicting backorders in realtime.
