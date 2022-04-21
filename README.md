@@ -320,9 +320,9 @@ recommended stock then flag the product 1 else 0.
 
 Below are the results obtained from applying various ML models,
 
-+------------------+---------+--------+-----------+--------+--------------+
+
 |      MODEL       | ROC-AUC | PR-AUC | PRECISION | RECALL | +VE F1-SCORE |
-+------------------+---------+--------+-----------+--------+--------------+
+---------------------------------------------------------------------------
 |      Logit       |   0.9   |  0.09  |    0.05   |  0.87  |     0.09     |
 |   Logit_binned   |   0.89  |  0.09  |    0.05   |  0.8   |     0.09     |
 |        DT        |   0.93  |  0.21  |    0.07   |  0.86  |     0.12     |
@@ -337,7 +337,6 @@ Below are the results obtained from applying various ML models,
 | XGB_undersampled |   0.95  |  0.19  |    0.07   |  0.89  |     0.13     |
 |   Balanced_RF    |   0.95  |  0.27  |    0.08   |  0.87  |     0.14     |
 |   EasyEnsemble   |   0.93  |  0.17  |    0.06   |  0.86  |     0.09     |
-+------------------+---------+--------+-----------+--------+--------------+
 
 
 Based on the above performance table, Random Forest trained on undersampled data seems to perform well on the data and can be used for predicting backorders in realtime.
