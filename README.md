@@ -8,26 +8,22 @@
 An item on backorder is an out of stock product that is expected to be delivered by a certain date once it is back in stock. Businesses will often still sell products on backorder with the guarantee to ship them to the buyer once their inventory has been replenished.
 Backordering an item means the shopper can buy the item now and receive it at a future date when the item is in stock and available.
 
-Material backorder is a common supply chain problem, impacting an inventory system service level and effectiveness.Identifying parts with the highest chances of shortage prior its occurrence can present a high opportunity to improve an overall company’s performance.
 ### Problem statement: 
 
 The objective of the problem is to predict products that have higher chances of getting into backorder based on historical data.
 So using the existing data,a binary machine learnig model should be built to classify the products that might run into backorders.
 
-<h3> Business Objectives/Constraints: </h3>
-Following are the Objectives/Constraints to be considered while building the model,
-
-
-- Misclassification could be a problem based on the space available in the warehouse.
-- Interpretability is an important aspect,knowing why the model predicts backorder could help the seller to determine the reorder point.
-- Latency is not an important aspect.
-
 #### Data Source:
 https://www.kaggle.com/c/untadta
 
-#### Research paper:
-https://www.researchgate.net/publication/319553365_Predicting_Material_Backorders_in_Inventory_Management_using_Machine_Learning
+### Requirements:
+- Python 3.6.8
+- Scikit-learn 0.22.1
+- imblearn 0.6.1
 
+### Scripts
+1.  Back order Prediction EDA : This file contains Exploratory Data Analysis, feature engineering, feature encoding , feature binning performed on data available.
+2.  Back order Prediction : contains various machinelearning models trained on the data and the final evaluation result of various models.
 
 <h2> 2.Solving the problem with Machine Learning</h2>
  <h3> Data Overview </h3>
@@ -52,6 +48,7 @@ https://www.researchgate.net/publication/319553365_Predicting_Material_Backorder
     
 ### Performance metrics:
      - area under the Receiver Operator Characteristic and precision-recall curves,
+     - f1-score
      - Confusion Matrices.
 
 
