@@ -50,9 +50,7 @@ https://www.kaggle.com/c/untadta
      - area under the Receiver Operator Characteristic and precision-recall curves,
      - f1-score
      - Confusion Matrices.
-
-
-<h3> Exploratory Data Analysis</h3>
+     
 <h3> Distribution of class variable </h3>
 
 Dataset contains 23 columns, among them 15 features are numerical,7 are categorical and one target variable('went_on_backorder) with values 'YES' for a backorder and 'NO' for a non-backorder.
@@ -60,223 +58,14 @@ Data is extremely imbalanced with only 0.7% of the data belonging to backorder p
 
 ![alt text](https://github.com/Shekhar-Gudepu/Backorder-Prediction/blob/main/EDA/data_skew.png?raw=true)
 
-<h3> Missing values </h3>
-- There are no null values in any feature except for lead_time, lead time has nearly 6% of data missing.
+<h2>Resampling Techniques for handling class imbalance</h2>
 
-![alt text](https://github.com/Shekhar-Gudepu/Backorder-Prediction/blob/main/MissingValues.png?raw=true)
+1.Random Oversampling: Data in the minority class has been randomly repeated multiple times to match the no.of datapoints in the majority class.
 
-<h3> Analysis on numerical features </h3>
-<h4> Distribution plots of Numerical features </h4>
+2.Class weight parameter of sklearn module: sklearn provides a parameter 'class_weight' through which minority datapoints can be given more weight when the model fits the data.
 
-- Below are distribution plots of few numerical features (only few distribution plots are considered below because most of the distribtuions are similar),
+3.Imblearn module's ensemble models: Imblearn provides various ensemble models where each base learner is fed with data that is oversampled or undersampled.Imblearn's 'BalancedRandomForestClassifier' has been used where each bootstrap sample is undersampled.
 
-##### sales forecast:
-
-![alt text](https://github.com/Shekhar-Gudepu/Backorder-Prediction/blob/main/EDA/forecast_9_monthnumerical_dist.png?raw=true)
-
-##### transport time:
-
-![alt text](https://github.com/Shekhar-Gudepu/Backorder-Prediction/blob/main/EDA/lead_timenumerical_dist.png?raw=true)
-
-##### current inventory level:
-
-![alt text](https://github.com/Shekhar-Gudepu/Backorder-Prediction/blob/main/EDA/national_invnumerical_dist.png?raw=true&s=50)
-
-##### product performance in 12 months:
-
-![alt text](https://github.com/Shekhar-Gudepu/Backorder-Prediction/blob/main/EDA/perf_12_month_avgnumerical_dist.png?raw=true&s=50)
-
-##### sales in 9 months:
-
-![alt text](https://github.com/Shekhar-Gudepu/Backorder-Prediction/blob/main/EDA/sales_9_monthnumerical_dist.png?raw=true&s=50)
-
-#### Observations from the plots:
-
-- All the features are extemely skewed to the right with most of the values being present at the initial values.
-  
-    
-- Maximum values for all the features differ between backorder and non-backorder products significantly,maximum values of backorder products tend to be lot lesser than non-backorder products.
-    
-    
-- There are some negative values in the distribution of product performance features which could be due to some error,further analysis on the feature determined that the values of performance should be in the range 0.1-1.0 not negative values.
-
-
-- Current inventory level feature also has negative values(~1%) which could be due to error while collecting the data,all the feature values are converted to positive values.
-    
-    
-- For all the features, distributions of Backorder products and Non-Backorder products are similar,making it difficult to draw insights about backorder products.Difference in class distributions could have helped classifying the data better.
-
-<h3> Percentile plots: </h3>
-Following are the percentile plots of features that gave some insights,
-
-##### forecast sales for 3 months:
-
-![alt text](https://github.com/Shekhar-Gudepu/Backorder-Prediction/blob/main/EDA/percentiles_forecast3months.png?raw=true)
-
-##### No.of units in transport:
-
- Percentile values:
- 
- - 0 %le	 :0.0 
- - 10 %le	:0.0
- - 20 %le	:0.0
- - 30 %le	:0.0
- - 40 %le	:0.0 
- - 50 %le	:0.0
- - 60 %le	:0.0
- - 70 %le	:0.0
- - 80 %le	:1.0
- - 90 %le	:16.0
- - 100%le	:489408.0
- 
-![alt text](https://github.com/Shekhar-Gudepu/Backorder-Prediction/blob/main/EDA/percentiles_intransitQty.png?raw=true)
-
-##### Minimum recommended stock:
-
-percentile values:
-
-- 0 %le  	: 0.0
-- 10 %le  : 0.0
-- 20 %le  : 0.0
-- 30 %le 	: 0.0
-- 40 %le  : 0.0
-- 50 %le 	: 0.0
-- 60 %le  : 1.0
-- 70 %le 	: 1.0
-- 80 %le 	: 3.0
-- 90 %le 	: 21.0
-- 100 %le : 7669.0
-
-![alt text](https://github.com/Shekhar-Gudepu/Backorder-Prediction/blob/main/EDA/percentiles_minStock.png?raw=true&s=50)
-
-##### no.of units due in past from source:
-
-percentile values:
-
--  0 %le  	 : 0.0
--  10 %le  	: 0.0
--  20 %le  	: 0.0
--  30 %le  	: 0.0
--  40 %le  	: 0.0
--  50 %le  	: 0.0
--  60 %le  	: 0.0
--  70 %le  	: 0.0
--  80 %le  	: 0.0
--  90 %le  	: 0.0
--  100 %le  	: 720.0
-
-![alt text](https://github.com/Shekhar-Gudepu/Backorder-Prediction/blob/main/EDA/percentiles_piecesPastdue.png?raw=true)
-
-
-
-
-<h5>Observations:</h5>
-All the numerical features values spiked up after the 90th percentile value except for lead time.Upon further analysis on descriptive statstic and percentile plots gave the following insights,
- 
- - Based on the analysis on current inventory level, current no.of units held in stock for the items backordered tend to be less than non-backordered items.
- - Distributions of both backorder and non-backorder product's lead time are similar with most of the products lead time being 2,8,12 days.
-- Probability of a product being delivered to the retailer in 8 days is slighlty higher for non-backorder products.
-- For the feature intransit quantity, there is a difference in backorder and non-backorder products for values greater than 1,backorder products have higher intransit quantity.
-- 60% of the products forecast sales are 0 units,only 40% of the products have forecast sales of atleast one unit.
-- Typically backorder products sales tend to be high but there isn't any difference between the distributions of backorder product sales and non-backorder product sales.
-- There are nearly 40% of products that didn't have any sales in the 9 months and most frequent no.of units sold is 0.
-- By looking at the individual sales of each 3 month periods there are products whose sales have decreased over the time and there are products that have sales increased over time.
-- One of the reason for backorders is unusual demand or unusual sales of product due to seasonality.Upon checking for sudden spike in sales over time, data points in both backorder and non-backorder have normal increase in sales without any sudden increase.So unusual sales doesn't help in the classification of the backorder products. 
-- There are 50% of products whose minimum no.of stock units recommended in the inventory equal to 0.
-- 99% of the products have less than 100 recommended stock units.
-- 99% of the values are just 0's for units overdue from source in the past.
-- Most products performance is greater than 0.6 with most products having the performance ratings 0.99,0.78,0.98.
-- Feature local backorder quantity which indicates the amount of stock overdue will not be usefull in predicting the backorder products since nearly all the values are 0's.
-
-Above are some of the insights drawn from descriptive statistics and percentile plots of numerical features.Since all features values spike after 90%le, values upto 90%le are considered for training Machine Learning models.
-
-Negative values in Performance features are removed from the data.
-
-Missing values in lead time feature have been imputed with most frequent value.
-
-<h3> Analysis on categorical features: General risk flags</h3>
-
-##### Deck risk:
-
-![alt text](https://github.com/Shekhar-Gudepu/Backorder-Prediction/blob/main/EDA/deck_risk_riskFlag.png?raw=true)
-
-##### Oe constraint:
-
-![alt text](https://github.com/Shekhar-Gudepu/Backorder-Prediction/blob/main/EDA/oe_constraint_riskFlag.png?raw=true)
-
-##### potential issue:
-
-![alt text](https://github.com/Shekhar-Gudepu/Backorder-Prediction/blob/main/EDA/potential_issue_riskFlag.png?raw=true)
-
-##### ppap risk:
-
-![alt text](https://github.com/Shekhar-Gudepu/Backorder-Prediction/blob/main/EDA/ppap_risk_riskFlag.png?raw=true)
-
-##### rev stop:
-
-![alt text](https://github.com/Shekhar-Gudepu/Backorder-Prediction/blob/main/EDA/rev_stop_riskFlag.png?raw=true)
-
-##### stop auto buy:
-
-![alt text](https://github.com/Shekhar-Gudepu/Backorder-Prediction/blob/main/EDA/stop_auto_buy_riskFlag.png?raw=true)
-
-
-
-<h5>Observations:</h5>
-
-- Generally products that have some risk factors tend get into backorders but there is no significant difference that can be observed between backorder products and non-backorder products due to general risk flags.
-- rev_stop and potential issue are not useful for the classification because no product have any of these risks.
-
-<h3>Multivariate Analysis</h3>
-<h5>Correlation Matrix</h5>
-
-![alt text](https://github.com/Shekhar-Gudepu/Backorder-Prediction/blob/main/EDA/correlation.png?raw=true)
-
-<h5>Pairplot</h5>
-
-![alt text](https://github.com/Shekhar-Gudepu/Backorder-Prediction/blob/main/EDA/pairplot.png?raw=true)
-
-<h5>category plots</h5>
-
-![alt text](https://github.com/Shekhar-Gudepu/Backorder-Prediction/blob/main/EDA/sales_9_monthcatplot.png?raw=true)
-
-![alt text](https://github.com/Shekhar-Gudepu/Backorder-Prediction/blob/main/EDA/forecast_9_monthcatplot.png?raw=true)
-
-![alt text](https://github.com/Shekhar-Gudepu/Backorder-Prediction/blob/main/EDA/in_transit_qtycatplot.png?raw=true)
-
-![alt text](https://github.com/Shekhar-Gudepu/Backorder-Prediction/blob/main/EDA/lead_timecatplot.png?raw=true)
-
-![alt text](https://github.com/Shekhar-Gudepu/Backorder-Prediction/blob/main/EDA/min_bankcatplot.png?raw=true)
-
-![alt text](https://github.com/Shekhar-Gudepu/Backorder-Prediction/blob/main/EDA/national_invcatplot.png?raw=true)
-
-![alt text](https://github.com/Shekhar-Gudepu/Backorder-Prediction/blob/main/EDA/perf_12_month_avgcatplot.png?raw=true)
-
-<h5>Observations:</h5>
-
-- Sales till 1st month,3rd month,6th month and 9th month are highly correlted to each other.
-
-- Minimum no of units required in the inventory and no.of units in transport are correlated with both forecast features and sales features.
-
-- Sales of products are high for the products with lesser lead time.There is a decline in the sales when lead time increases.
-
-- There is an increase in performance scores as the forecast values increse.
-
-- products that went on backorder have lesser amount of stock in the inventory,lesser no.of units in transport and lesser minimum no.of units that are required in stock.
-
-- Products that went on backorder have lower sales and forecast values.
-
-- for the products that have higher current inventory level in_transit quantity is less.
-
-- there are less instock units for the products with lead time between 20 and 40.
-
-- sales tend to be slightly higher for products with lesser current inventory level.
-
-- intransit quantity starts decreasing as the forecast sales increases.
-
-- Backorder products are dense at high performance values.
-
-- All the sales features and forecast features are highly correlated to each other,so including any one of the sales feature and any one of the forecast feature will be sufficient for builiding the model.
 
 <h2>Feature Engineering</h2>
 
@@ -305,14 +94,6 @@ month period, then flag the product as 1 else 0.
 - Low safety stock: if current inventory is less than minimum
 recommended stock then flag the product 1 else 0.
 
-<h2>Resampling Techniques for handling class imbalance</h2>
-
-1.Random Oversampling: Data in the minority class has been randomly repeated multiple times to match the no.of datapoints in the majority class.
-
-2.Class weight parameter of sklearn module: sklearn provides a parameter 'class_weight' through which minority datapoints can be given more weight when the model fits the data.
-
-3.Imblearn module's ensemble models: Imblearn provides various ensemble models where each base learner is fed with data that is oversampled or undersampled.Imblearn's 'BalancedRandomForestClassifier' has been used where each bootstrap sample is undersampled.
-
 <h2>Machine Learning models and their results</h2>
 
 Below are the results obtained from applying various ML models,
@@ -336,4 +117,4 @@ Below are the results obtained from applying various ML models,
 |   EasyEnsemble   |   0.93  |  0.17  |    0.06   |  0.86  |     0.09     |
 
 
-Based on the above performance table, Random Forest trained on undersampled data seems to perform well on the data and can be used for predicting backorders in realtime.
+Based on the above performance table, Random Forest trained on undersampled data performed well on the data and can be used for predicting backorders in realtime.
