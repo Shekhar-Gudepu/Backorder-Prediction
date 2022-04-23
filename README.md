@@ -22,7 +22,7 @@ https://www.kaggle.com/c/untadta
 - imblearn 0.6.1
 
 ### Scripts
-1.  Back order Prediction EDA : This file contains Exploratory Data Analysis, feature engineering, feature encoding , feature binning performed on data available.
+1.  Back order Prediction EDA : This file contains Exploratory Data Analysis, feature engineering, feature encoding , feature binning performed on the data.
 2.  Back order Prediction : contains various machinelearning models trained on the data and the final evaluation result of various models.
 
 <h2> 2.Solving the problem with Machine Learning</h2>
